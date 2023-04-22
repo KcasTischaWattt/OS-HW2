@@ -2,14 +2,18 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <pthread.h>
+#include <sys/types.h>
+#include <sys/ipc.h>
 #include <sys/sem.h>
+
+#define SEM_KEY_POT 1234
+#define SEM_KEY_COOK 5678
 
 int N = 10; // количество дикарей
 int M = 5; // вместимость горшка
 int curr = 5; // текущее количество мяса в горшке
 
-int pot; // идентификатор семафора для горшка
-int cook; // идентификатор семафора для повара
+int semid_pot, semid_cook;
 
 void* savage(void* arg) {
     int id = *(int*)arg;
@@ -21,27 +25,24 @@ void* savage(void* arg) {
 
         printf("Savage %d is hungry.\n", id);
         
-        struct sembuf pot_lock = {0, -1, 0}; // ждем, пока горшок не освободится
-        semop(pot, &pot_lock, 1);
+        struct sembuf op[] = {{0, -1, 0}}; // ждем доступа к горшку
+        semop(semid_pot, op, 1);
         
         if(curr > 0) { // если в горшке еще есть мясо, едим его
             printf("Savage %d is eating.\n", id);
             curr--;
         } else { // если горшок пустой, будим повара и ждем, пока он его наполнит
             printf("Pot is empty, waking up the cook.\n");
-            
-            struct sembuf cook_unlock = {0, 1, 0}; // разблокируем семафор для повара, чтобы он мог начать готовить
-            semop(cook, &cook_unlock, 1);
-            
-            struct sembuf pot_lock_again = {0, -1, 0}; // ждем, пока горшок не будет заполнен
-            semop(pot, &pot_lock_again, 1);
-            
+            semctl(semid_cook, 0, SETVAL, 1); // будим повара
+            op[0].sem_op = -1;
+            semop(semid_pot, op, 1); // ждем, пока повар наполнит горшок
             printf("Savage %d got some meat from the pot.\n", id);
             curr--; // дикарь берет один кусок мяса из горшка
         }
         
-        struct sembuf pot_unlock = {0, 1, 0}; // освобождаем горшок
-        semop(pot, &pot_unlock, 1);
+        op[0].sem_op = 1;
+        semop(semid_pot, op, 1); // освобождаем горшок
+    
     }   
 
     return NULL;
@@ -50,59 +51,42 @@ void* savage(void* arg) {
 void* cook_fn(void* arg) {
     while(1) {
         printf("Cook is sleeping.\n");
-        
-        struct sembuf cook_lock = {0, -1, 0}; // ждем, пока повара разбудят дикари
-        semop(cook, &cook_lock, 1);
+        struct sembuf op[] = {{0, -1, 0}}; // ждем, пока повара разбудят дикари
+        semop(semid_cook, op, 1);
         
         printf("Cook is cooking.\n");
         sleep(2); // готовим еду некоторое время
         
-        struct sembuf pot_lock = {0, -1, 0}; // заполняем горшок
-        semop(pot, &pot_lock, 1);
-        
+        op[0].sem_op = 1;
+        semop(semid_pot, op, 1); // наполняем горшок
         curr = M;
         printf("Cook filled the pot.\n");
-        
-        struct sembuf pot_unlock = {0, 1, 0}; // освобождаем горшок
-	semop(pot, &pot_unlock, 1);
-     }
-     return NULL;
+    }
+
+    return NULL;
 }
 
 int main() {
-	pthread_t savages[N];
-	pthread_t cook_thread;
-	int savage_ids[N];
-	for(int i = 0; i < N; i++) {
-	    savage_ids[i] = i;
-	    pthread_create(&savages[i], NULL, savage, &savage_ids[i]);
-	}
+    semid_pot = semget(SEM_KEY_POT, 1, IPC_CREAT | 0666); // создаем семафор горшка
+    semctl(semid_pot, 0, SETVAL, 1); // инициализируем его значением 1
+    
+    semid_cook = semget(SEM_KEY_COOK, 1, IPC_CREAT | 0666); // создаем семафор повара
+    semctl(semid_cook, 0, SETVAL, 0); // инициализируем его значением 0, так как повар спит вначале
+    pthread_t savage_threads[N], cook_thread;
 
-	pot = semget(IPC_PRIVATE, 1, 0666 | IPC_CREAT); // создаем семафор для горшка
-	cook = semget(IPC_PRIVATE, 1, 0666 | IPC_CREAT); // создаем семафор для повара
+    int savage_ids[N];
+    for(int i = 0; i < N; i++) {
+        savage_ids[i] = i;
+        pthread_create(&savage_threads[i], NULL, savage, &savage_ids[i]);
+    }
 
-	// инициализируем семафоры
-	union semun {
-	    int val;
-	    struct semid_ds *buf;
-	    unsigned short *array;
-	} arg;
+    pthread_create(&cook_thread, NULL, cook_fn, NULL);
 
-	arg.val = 1;
-	semctl(pot, 0, SETVAL, arg); // устанавливаем начальное значение семафора для горшка в 1
-	arg.val = 0;
-	semctl(cook, 0, SETVAL, arg); // устанавливаем начальное значение семафора для повара в 0
+    for(int i = 0; i < N; i++) {
+        pthread_join(savage_threads[i], NULL);
+    }
 
-	pthread_create(&cook_thread, NULL, cook_fn, NULL); // создаем поток для повара
+    pthread_join(cook_thread, NULL);
 
-	for(int i = 0; i < N; i++) {
-	    pthread_join(savages[i], NULL); // ожидаем завершения потоков дикарей
-	}
-
-	pthread_cancel(cook_thread); // отменяем поток повара
-
-	semctl(pot, 0, IPC_RMID, 0); // удаляем семафор для горшка
-	semctl(cook, 0, IPC_RMID, 0); // удаляем семафор для повара
-
-	return 0;
+    return 0;
 }
