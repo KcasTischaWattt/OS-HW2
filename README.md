@@ -20,9 +20,9 @@
 > * [Отчёт](https://github.com/KcasTischaWattt/OS-HW2/blob/main/On%206/readme.md)
 
 ## На 7 баллов:
-> * [Папка](https://github.com/KcasTischaWattt/OS-HW2/tree/main/On%207) с [программой](https://github.com/KcasTischaWattt/OS-HW2/blob/main/On%207/program.c) и [тестами](https://github.com/KcasTischaWattt/OS-HW2/blob/main/On%207/Test7.png)
+> * [Папка](https://github.com/KcasTischaWattt/OS-HW2/tree/main/On%207) с [программой](https://github.com/KcasTischaWattt/OS-HW2/blob/main/On%207/savage.c) и [тестами](https://github.com/KcasTischaWattt/OS-HW2/blob/main/On%207/Test7.png)
 > * [Отчёт](https://github.com/KcasTischaWattt/OS-HW2/blob/main/On%207/readme.md)
 
 ## На 8 баллов:
-> * [Папка](https://github.com/KcasTischaWattt/OS-HW2/tree/main/On%208) с [программой](https://github.com/KcasTischaWattt/OS-HW2/blob/main/On%208/program.c) и [тестами](https://github.com/KcasTischaWattt/OS-HW2/blob/main/On%208/Test8.png)
+> * [Папка](https://github.com/KcasTischaWattt/OS-HW2/tree/main/On%208) с [программой](https://github.com/KcasTischaWattt/OS-HW2/blob/main/On%208/savage.c) и [тестами](https://github.com/KcasTischaWattt/OS-HW2/blob/main/On%208/Test8.png)
 > * [Отчёт](https://github.com/KcasTischaWattt/OS-HW2/blob/main/On%208/readme.md)
