@@ -23,6 +23,6 @@
 > * [Папка](https://github.com/KcasTischaWattt/OS-HW2/tree/main/On%207) с [процессом дикарей](https://github.com/KcasTischaWattt/OS-HW2/blob/main/On%207/savage.c), [процессом повара](https://github.com/KcasTischaWattt/OS-HW2/blob/main/On%207/cook.c) и [тестами](https://github.com/KcasTischaWattt/OS-HW2/blob/main/On%207/Test7.png)
 > * [Отчёт](https://github.com/KcasTischaWattt/OS-HW2/blob/main/On%207/readme.md)
 
-## На 8 баллов (*Две программы с семафорами в стандарте UNIX SYSTEM V*):
+## На 8 баллов (*Две программы с семафорами UNIX SYSTEM V*):
 > * [Папка](https://github.com/KcasTischaWattt/OS-HW2/tree/main/On%208) с [процессом дикарей](https://github.com/KcasTischaWattt/OS-HW2/blob/main/On%208/savage.c), [процессом повара](https://github.com/KcasTischaWattt/OS-HW2/blob/main/On%208/cook.c) и [тестами](https://github.com/KcasTischaWattt/OS-HW2/blob/main/On%208/Test8.png)
 > * [Отчёт](https://github.com/KcasTischaWattt/OS-HW2/blob/main/On%208/readme.md)
