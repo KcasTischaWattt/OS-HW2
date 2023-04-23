@@ -19,10 +19,10 @@
 > * [Папка](https://github.com/KcasTischaWattt/OS-HW2/tree/main/On%206) с [программой](https://github.com/KcasTischaWattt/OS-HW2/blob/main/On%206/program.c) и [тестами](https://github.com/KcasTischaWattt/OS-HW2/blob/main/On%206/Test6.png)
 > * [Отчёт](https://github.com/KcasTischaWattt/OS-HW2/blob/main/On%206/readme.md)
 
-## На 7 баллов:
+## На 7 баллов (*Две программы с именованными POSIX семафорами*):
 > * [Папка](https://github.com/KcasTischaWattt/OS-HW2/tree/main/On%207) с [процессом дикарей](https://github.com/KcasTischaWattt/OS-HW2/blob/main/On%207/savage.c), [процессом повара](https://github.com/KcasTischaWattt/OS-HW2/blob/main/On%207/cook.c) и [тестами](https://github.com/KcasTischaWattt/OS-HW2/blob/main/On%207/Test7.png)
 > * [Отчёт](https://github.com/KcasTischaWattt/OS-HW2/blob/main/On%207/readme.md)
 
-## На 8 баллов:
+## На 8 баллов (*Две программы с семафорами в стандарте UNIX SYSTEM V*):
 > * [Папка](https://github.com/KcasTischaWattt/OS-HW2/tree/main/On%208) с [процессом дикарей](https://github.com/KcasTischaWattt/OS-HW2/blob/main/On%208/savage.c), [процессом повара](https://github.com/KcasTischaWattt/OS-HW2/blob/main/On%208/cook.c) и [тестами](https://github.com/KcasTischaWattt/OS-HW2/blob/main/On%208/Test8.png)
 > * [Отчёт](https://github.com/KcasTischaWattt/OS-HW2/blob/main/On%208/readme.md)
