@@ -7,15 +7,15 @@
 только горшок не пуст, иначе дикарь будит повара и ждет, пока
 тот не наполнит горшок. Повар, сварив обед, засыпает. `
 
-## На 4 балла(*Неменованные POSIX семафоры*):
+## На 4 балла (*Неменованные POSIX семафоры*):
 > * [Папка](https://github.com/KcasTischaWattt/OS-HW2/tree/main/On%204) с [программой](https://github.com/KcasTischaWattt/OS-HW2/blob/main/On%204/program.c) и [тестами](https://github.com/KcasTischaWattt/OS-HW2/blob/main/On%204/Test4.png)
 > * [Отчёт](https://github.com/KcasTischaWattt/OS-HW2/blob/main/On%204/readme.md)
 
-## На 5 баллов(*Именованные POSIX семафоры*):
+## На 5 баллов (*Именованные POSIX семафоры*):
 > * [Папка](https://github.com/KcasTischaWattt/OS-HW2/tree/main/On%205) с [программой](https://github.com/KcasTischaWattt/OS-HW2/blob/main/On%205/program.c) и [тестами](https://github.com/KcasTischaWattt/OS-HW2/blob/main/On%205/Test5.png)
 > * [Отчёт](https://github.com/KcasTischaWattt/OS-HW2/blob/main/On%205/readme.md)
 
-## На 6 баллов(*Семафоры в стандарте UNIX SYSTEM V*):
+## На 6 баллов (*Семафоры в стандарте UNIX SYSTEM V*):
 > * [Папка](https://github.com/KcasTischaWattt/OS-HW2/tree/main/On%206) с [программой](https://github.com/KcasTischaWattt/OS-HW2/blob/main/On%206/program.c) и [тестами](https://github.com/KcasTischaWattt/OS-HW2/blob/main/On%206/Test6.png)
 > * [Отчёт](https://github.com/KcasTischaWattt/OS-HW2/blob/main/On%206/readme.md)
 
